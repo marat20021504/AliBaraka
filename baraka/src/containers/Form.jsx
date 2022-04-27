@@ -122,6 +122,13 @@ const Wrapper = styled.div`
                 color: #FFFFFF;
                 border: none;
                 cursor: pointer;
+                transition: 0.5s ease;
+
+                &:hover {
+                    color: #037B35;
+                    background-color: white;
+                    border: 1px solid #037B35;
+                }
             }
         }
     }

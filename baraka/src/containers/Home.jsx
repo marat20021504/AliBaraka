@@ -104,6 +104,13 @@ const Wrapper = styled.div`
                 line-height: 30px;
                 color: #FFFFFF;
                 cursor: pointer;
+                transition: 0.3s ease;
+
+                &:hover {
+                    background-color: white;
+                    color: #FCBD17;
+                    border: 3px solid #FCBD17;
+                }
             }
         }
 

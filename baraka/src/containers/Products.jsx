@@ -58,7 +58,7 @@ const Products = () => {
                     {products.map((product) => { 
                             return (
                                 <Fade bottom cascade>
-                                    <div className="Product">
+                                    <div key={Math.random()} className="Product">
                                         <img src={product.img} alt="image" />
 
                                         <div className="Turlari">
@@ -83,7 +83,7 @@ const Products = () => {
                             </p>
                             <div className="buttons">
                                 <button>MORE ABOUT</button>
-                                <a href="https://www.youtube.com/">OUR YOUTUBE</a>
+                                <button><a href="https://www.youtube.com/">OUR YOUTUBE</a></button>
                             </div>
                         </div>
                     </Fade>
@@ -110,7 +110,6 @@ const Products = () => {
                 <img src={Img2} alt="Img2" />
                 <img src={Img1} alt="Img1" />
                 <img src={Img2} alt="Img2" />
-
             </div>
 
             <div className="google">
@@ -249,6 +248,12 @@ const Wrapper = styled.div`
                         line-height: 30px;
                         color: #037B35;
                         cursor: pointer;
+                        transition: 0.5s ease;
+
+                        &:hover {
+                            background-color: #037B35;
+                            color: white;
+                        }
                     }
 
                     a {
@@ -256,6 +261,10 @@ const Wrapper = styled.div`
                         font-size: 18px;
                         line-height: 30px;
                         color: #037B35;
+
+                        &:hover {
+                            color: white;
+                        }
                     }
                 }
             }
