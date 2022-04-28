@@ -1,11 +1,5 @@
 import styled from "styled-components";
 import archa from "../assets/archa.png"
-import Plyonka from "../assets/plyonka.png"
-import Zajim from "../assets/zajim.png"
-import Tomchilab from "../assets/tomchilab.png"
-import Issiqxona from "../assets/issiqxona.png"
-import Isitish from "../assets/isitish.png"
-import Qoshimcha from "../assets/qoshimcha.png"
 import traktor from "../assets/traktor.png"
 import tomorrow from "../assets/tomorrow.png"
 import agorod from "../assets/agorod.png"
@@ -18,21 +12,24 @@ import slack from "../assets/logos_slack.svg"
 import wordpress from "../assets/logos_wordpress.svg"
 import right from "../assets/right.svg"
 import Footer from "../components/Footer";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import Fade from 'react-reveal/Fade';
+import React, { useEffect, useState } from "react";
+import Product from "../components/Product";
+import API from "../utils/axios";
 
 const Products = () => {
     const {pathname} = useLocation()
+    const [products, setProducts] = useState([])
 
-    const products = [
-        {img: Plyonka, title: "Asosiy Plyonka Turlari", text: "Et magni et ea unde tempore. Corrupti quia adipisci qui dicta sint."},
-        {img: Zajim, title: "Asosiy Zajim turlari", text: "Et magni et ea unde tempore. Corrupti quia adipisci qui dicta sint."},
-        {img: Tomchilab, title: "Tomchilab sug’orish tizimi", text: "Et magni et ea unde tempore. Corrupti quia adipisci qui dicta sint."},
-        {img: Issiqxona, title: "ISSIQXONANING sovutish TIZIMI", text: "Et magni et ea unde tempore. Corrupti quia adipisci qui dicta sint."},
-        {img: Isitish, title: "ISSIQXONANING ISITISH TIZIMI", text: "Et magni et ea unde tempore. Corrupti quia adipisci qui dicta sint."},
-        {img: Qoshimcha, title: "QO’shimcha aksessuarlar", text: "Et magni et ea unde tempore. Corrupti quia adipisci qui dicta sint."}
-    ]
+
+    useEffect(() => {
+        API.get("/products/")
+            .then((response) => {
+                setProducts(response.data);
+        });
+      }, []);
 
     return (
         <Wrapper>   
@@ -46,30 +43,26 @@ const Products = () => {
             <div className="Product-container">
 
                 <Fade top cascade>
-                    <div className="Texts">
-                        <h1>our production</h1>
-                        <p>
-                            "Your work is going to fill a large part of your life, and the only way to <br />
-                            be truly satisfied is to do what you believe is great work]</p>
+                    <div className="Texts-btn">
+                        <div className="Texts">
+                            <h1>our production</h1>
+                            <p>
+                                "Your work is going to fill a large part of your life, and the only way to <br />
+                                be truly satisfied is to do what you believe is great work]</p>
+                        </div>
+                        
+                        <Link to={"/create-product"}>
+                            <button>Create Product</button>
+                        </Link>
                     </div>
                 </Fade>
 
                 <div className="product-grid">
-                    {products.map((product) => { 
-                            return (
-                                <Fade bottom cascade>
-                                    <div key={Math.random()} className="Product">
-                                        <img src={product.img} alt="image" />
-
-                                        <div className="Turlari">
-                                            <h3>{product.title}</h3>
-                                            <p>{product.text}</p>
-                                        </div>
-                                    </div>
-                                </Fade>
+                        {products.map((product) => {
+                            return(
+                                <Product key={Math.random()}  product={product} />
                             )
                         })}
-                    
                 </div>
 
                 <div className="Company">
@@ -147,23 +140,49 @@ const Wrapper = styled.div`
         z-index: 500;
         padding: 0 150px;
 
-        .Texts {
-            padding-left: 20px;
+        .Texts-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-            h1 {
-                font-weight: 800;
-                font-size: 56px;
-                line-height: 54px;
-                text-transform: uppercase;
-                color: #000000;
+            .Texts {
+                padding-left: 20px;
+    
+                h1 {
+                    font-weight: 800;
+                    font-size: 56px;
+                    line-height: 54px;
+                    text-transform: uppercase;
+                    color: #000000;
+                }
+    
+                p {
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 26px;
+                    color: #000000;
+                }
             }
 
-            p {
-                font-weight: 400;
-                font-size: 16px;
-                line-height: 26px;
-                color: #000000;
+            button {
+                width: 200px;
+                height: 50px;
+                background: #037B35;
+                border-radius: 30px;
+                font-size: 15px;
+                text-align: center;
+                color: #FFFFFF;
+                border: none;
+                cursor: pointer;
+                transition: 0.5s ease;
+
+                &:hover {
+                    color: #037B35;
+                    background-color: white;
+                    border: 1px solid #037B35;
+                }
             }
+
         }
 
         .product-grid {
@@ -171,42 +190,6 @@ const Wrapper = styled.div`
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 10px;
-
-            .Product {
-                display: flex;
-                align-items: center;
-                gap: 24px;
-                padding: 15px;
-                height: 200px;
-                background: #FFFFFF;
-                border: 0.8325px solid #D9DCEC;
-                box-sizing: border-box;
-                border-radius: 8.325px;
-                transition: .1s ease;
-                cursor: pointer;
-
-                &:hover {
-                    border: 3px solid #037B35;
-                }
-
-                .Turlari {
-                    h3 {
-                        margin-bottom: 13px;
-                        font-weight: 800;
-                        font-size: 20px;
-                        line-height: 22px;
-                        text-transform: uppercase;
-                        color: #000000;
-                    }
-
-                    p {
-                        font-weight: 400;
-                        font-size: 11.655px;
-                        line-height: 20px;
-                        color: #000000;
-                    }
-                }
-            }
         }
 
         .Company {

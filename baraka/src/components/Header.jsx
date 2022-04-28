@@ -9,7 +9,8 @@ const Header = () => {
         {title: "Products", to: "/products"},
         {title: "About us", to: "/products"},
         {title: "Blog", to: "/blog"},
-        {title: "Contact", to: "/"}
+        {title: "Contact", to: "/"},
+        {title: "Stories", to: "/stories"}
     ]
 
     return (
@@ -21,7 +22,7 @@ const Header = () => {
                 <div className="header-texts">
                     {Texts.map((text) => {
                         return (
-                            <Link to={text.to}>
+                            <Link key={Math.random()} to={text.to}>
                                 <p>{text.title}</p>
                             </Link>
                         )

@@ -3,7 +3,7 @@ import Group from "../assets/Group 35575.png"
 import FooterIcon from "../assets/footer-icon.svg"
 import media from "../assets/media.svg"
 import coding from "../assets/coding.svg"
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
 
@@ -32,7 +32,7 @@ const Footer = () => {
 
                 {links.map((link) => {
                     return (
-                        <div className="About">
+                        <div key={Math.random()} className="About">
                             <h3>{link.bold}</h3>
                             <p>{link.par1}</p>
                             <p>{link.par2}</p>
