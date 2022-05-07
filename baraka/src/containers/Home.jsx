@@ -19,7 +19,6 @@ const Home = () => {
     return (
         <Wrapper style={{ backgroundImage: `url(${BackgroundImg})` }}>
             <Header />
-
             <div className="Container">
                 <Fade top cascade>
                     <div className="Info">

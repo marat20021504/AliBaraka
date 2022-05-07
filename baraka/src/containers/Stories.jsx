@@ -7,7 +7,6 @@ import { Link } from "react-router-dom"
 
 
 const Stories = () => {
-
     const [stories, setStories] = useState([])
 
     useEffect(() => {
